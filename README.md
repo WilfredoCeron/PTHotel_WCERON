@@ -1,3 +1,4 @@
+
 # Hotel Booking Platform
 
 Una plataforma moderna de reservas de hoteles construida con **Clean Architecture**, **CQRS**, y **EF Core + Dapper**.
@@ -165,3 +166,4 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 ```
 
 ---
+=======
