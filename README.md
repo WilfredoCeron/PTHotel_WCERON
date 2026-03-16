@@ -1,11 +1,6 @@
-# Hotel Booking Platform
+# Hotel Booking Platform 
 
 Una plataforma moderna de reservas de hoteles construida con **Clean Architecture**, **CQRS**, y **EF Core + Dapper**.
-
-### Acceder a la aplicación:
-- **Frontend**: http://localhost:3000
-- **API**: http://localhost:5000
-- **Base de Datos**: localhost:14330 (Usuario: sa, Password: StrongPassw0rd!)
 
 ## 🎯 Stack Tecnológico
 
@@ -36,6 +31,7 @@ Una plataforma moderna de reservas de hoteles construida con **Clean Architectur
 - Docker y Docker Compose instalados
 - .NET 8 SDK (para desarrollo local)
 - Node.js 18+ (para desarrollo del frontend)
+- Postman (para prueba de los EndPoint)
 
 ---
 
@@ -96,7 +92,6 @@ HotelBookingPlatform/
 ├── frontend/                           # Aplicación Next.js
 ├── docker-compose.yml
 ├── README.md
-├── ARCHITECTURE.md
 └── postman-collection.json
 ```
 
