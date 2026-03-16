@@ -1,0 +1,395 @@
+{
+  "info": {
+    "name": "Hotel Booking Platform API",
+    "description": "Complete API collection for Hotel Booking Platform with idempotency tests",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "item": [
+    {
+      "name": "Hotels",
+      "item": [
+        {
+          "name": "Get All Hotels",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/hotels",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "hotels"]
+            }
+          }
+        },
+        {
+          "name": "Create Hotel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$timestamp}}-{{$randomInt}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/hotels",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "hotels"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Hotel Paradise\",\n  \"address\": \"123 Main St\",\n  \"city\": \"San Salvador\",\n  \"country\": \"El Salvador\",\n  \"phone\": \"+503 1234 5678\",\n  \"email\": \"info@paradise.com\"\n}"
+            }
+          },
+          "form_example": {
+            "name": "Hotel Paradise",
+            "address": "123 Main St",
+            "city": "San Salvador",
+            "country": "El Salvador",
+            "phone": "+503 1234 5678",
+            "email": "info@paradise.com"
+          }
+        },
+        {
+          "name": "Get Hotel by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/hotels/{{hotel_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "hotels", "{{hotel_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Hotel",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$timestamp}}-{{$randomInt}}"
+              },
+              {
+                "key": "Content-Type", 
+                "value": "application/json"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/hotels/{{hotel_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "hotels", "{{hotel_id}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Hotel Paradise Updated\",\n  \"address\": \"456 New St\",\n  \"city\": \"San Salvador\",\n  \"country\": \"El Salvador\",\n  \"phone\": \"+503 9876 5432\"\n}"
+            }
+          },
+          "form_example": {
+            "name": "Hotel Paradise Updated",
+            "address": "456 New St",
+            "city": "San Salvador",
+            "country": "El Salvador",
+            "phone": "+503 9876 5432"
+          }
+        },
+        {
+          "name": "Delete Hotel",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/hotels/{{hotel_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "hotels", "{{hotel_id}}"]
+            }
+          },
+          "form_example": {
+            "hotel_id": "1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RoomTypes",
+      "item": [
+        {
+          "name": "Get RoomTypes by Hotel",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/room-types?hotelId={{hotel_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "room-types"],
+              "query": [
+                {"key": "hotelId", "value": "{{hotel_id}}"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get RoomType by Id",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/room-types/{{room_type_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "room-types", "{{room_type_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Create RoomType",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$timestamp}}-{{$randomInt}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/room-types",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "room-types"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hotelId\": {{hotel_id}},\n  \"name\": \"Suite\",\n  \"description\": \"Habitación de lujo\",\n  \"capacity\": 2,\n  \"totalRooms\": 10\n}"
+            }
+          },
+          "form_example": {
+            "hotelId": 1,
+            "name": "Suite",
+            "description": "Habitación de lujo",
+            "capacity": 2,
+            "totalRooms": 10
+          }
+        },
+        {
+          "name": "Update RoomType",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{base_url}}/api/v1/room-types/{{room_type_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "room-types", "{{room_type_id}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Suite Actualizada\",\n  \"description\": \"Habitación renovada\",\n  \"capacity\": 3,\n  \"totalRooms\": 10\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete RoomType",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/room-types/{{room_type_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "room-types", "{{room_type_id}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Guests",
+      "item": [
+        {
+          "name": "Create Guest",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/guests",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "guests"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Juan\", \"lastName\": \"Pérez\", \"email\": \"juan@example.com\", \"phoneNumber\": \"+503 1234 5678\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Guests",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/guests?pageNumber=1&pageSize=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "guests"],
+              "query": [
+                {"key": "pageNumber", "value": "1"},
+                {"key": "pageSize", "value": "10"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking (with Idempotency)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Idempotency-Key", "value": "{{idempotency_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/bookings",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "bookings"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"hotelId\": \"{{hotel_id}}\", \"roomTypeId\": \"{{room_type_id}}\", \"guestId\": \"{{guest_id}}\", \"checkInDate\": \"2026-03-15\", \"checkOutDate\": \"2026-03-20\", \"numberOfRooms\": 1, \"numberOfGuests\": 2, \"specialRequests\": \"Non-smoking room\"}"
+            }
+          }
+        },
+        {
+          "name": "Create Booking - Duplicated Request (Idempotency Test)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Idempotency-Key", "value": "{{idempotency_key}}"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/bookings",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "bookings"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"hotelId\": \"{{hotel_id}}\", \"roomTypeId\": \"{{room_type_id}}\", \"guestId\": \"{{guest_id}}\", \"checkInDate\": \"2026-03-15\", \"checkOutDate\": \"2026-03-20\", \"numberOfRooms\": 1, \"numberOfGuests\": 2, \"specialRequests\": \"Non-smoking room\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Bookings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/bookings?pageNumber=1&pageSize=10&sortBy=CreatedAt&sortDirection=DESC",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "bookings"],
+              "query": [
+                {"key": "pageNumber", "value": "1"},
+                {"key": "pageSize", "value": "10"},
+                {"key": "sortBy", "value": "CreatedAt"},
+                {"key": "sortDirection", "value": "DESC"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Booking by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/v1/bookings/{{booking_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "bookings", "{{booking_id}}"]
+            }
+          }
+        },
+        {
+          "name": "Confirm Booking",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{base_url}}/api/v1/bookings/{{booking_id}}/confirm",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "bookings", "{{booking_id}}", "confirm"]
+            }
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/v1/bookings/{{booking_id}}/cancel?reason=Changed my mind",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "bookings", "{{booking_id}}", "cancel"],
+              "query": [
+                {"key": "reason", "value": "Changed my mind"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search Availability",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/search/availability",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "search", "availability"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"hotelId\": \"{{hotel_id}}\", \"checkInDate\": \"2026-03-15\", \"checkOutDate\": \"2026-03-20\", \"numberOfGuests\": 2}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "hotel_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "guest_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "booking_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "room_type_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "idempotency_key",
+      "value": "unique-key-12345",
+      "type": "string"
+    }
+  ]
+}
