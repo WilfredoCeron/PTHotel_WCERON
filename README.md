@@ -1,17 +1,6 @@
-
 # Hotel Booking Platform
 
 Una plataforma moderna de reservas de hoteles construida con **Clean Architecture**, **CQRS**, y **EF Core + Dapper**.
-
-## 🚀 Inicio Rápido
-
-Para iniciar la aplicación completa (API, Frontend y Base de Datos), ejecuta el script:
-
-```powershell
-.\start.ps1
-```
-
-Esto detendrá contenedores anteriores, construirá las imágenes y levantará todos los servicios automáticamente.
 
 ### Acceder a la aplicación:
 - **Frontend**: http://localhost:3000
@@ -166,4 +155,3 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 ```
 
 ---
-=======
